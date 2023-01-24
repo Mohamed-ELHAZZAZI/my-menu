@@ -15,6 +15,7 @@ const store = createStore({
                 phone: "",
                 type: "",
                 template_id: null,
+                template_name: "",
             },
             list: [],
         },
@@ -23,39 +24,48 @@ const store = createStore({
             images: [
                 {
                     id: 1,
-                    url: "https://fakeimg.pl/350x200/",
+                    name: "templateOne",
+                    url: "../storage/templates/2.png",
                 },
                 {
                     id: 2,
-                    url: "https://fakeimg.pl/350x200/",
+                    name: "templateOne",
+                    url: "../storage/templates/2.png",
                 },
                 {
                     id: 3,
-                    url: "https://fakeimg.pl/350x200/",
+                    name: "templateOne",
+                    url: "../storage/templates/2.png",
                 },
                 {
                     id: 5,
-                    url: "https://fakeimg.pl/350x200/",
+                    name: "templateOne",
+                    url: "../storage/templates/2.png",
                 },
                 {
                     id: 6,
-                    url: "https://fakeimg.pl/350x200/",
+                    name: "templateOne",
+                    url: "../storage/templates/2.png",
                 },
                 {
                     id: 7,
-                    url: "https://fakeimg.pl/350x200/",
+                    name: "templateOne",
+                    url: "../storage/templates/2.png",
                 },
                 {
                     id: 8,
-                    url: "https://fakeimg.pl/350x200/",
+                    name: "templateOne",
+                    url: "../storage/templates/2.png",
                 },
                 {
                     id: 9,
-                    url: "https://fakeimg.pl/350x200/",
+                    name: "templateOne",
+                    url: "../storage/templates/2.png",
                 },
                 {
                     id: 10,
-                    url: "https://fakeimg.pl/350x200/",
+                    name: "templateOne",
+                    url: "../storage/templates/2.png",
                 },
             ],
         },
@@ -122,6 +132,8 @@ const store = createStore({
         },
         setTemplate(state, val) {
             state.newMenu.info.template_id = val;
+            const tmp = state.fakeMenu.images.find((flm) => flm.id === val);
+            state.newMenu.info.template_name = tmp.name;
         },
         setError: (state, val) => {
             state.error = val;

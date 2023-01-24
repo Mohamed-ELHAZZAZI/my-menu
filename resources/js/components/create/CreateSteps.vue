@@ -48,7 +48,7 @@
                         </svg>
                     </span>
 
-                    <span class="hidden sm:block"> Info </span>
+                    <span class="hidden sm:block"> Menus template </span>
 
                     <svg
                         class="ml-0 h-6 w-6 sm:hidden"
@@ -108,7 +108,7 @@
                         </svg>
                     </span>
 
-                    <span class="hidden sm:block"> Menu template </span>
+                    <span class="hidden sm:block"> Lists </span>
 
                     <svg
                         class="mx-auto h-6 w-6 sm:hidden"
@@ -173,7 +173,7 @@
                         </svg>
                     </span>
 
-                    <span class="hidden sm:block"> Lists </span>
+                    <span class="hidden sm:block"> Info </span>
 
                     <svg
                         class="mx-auto h-6 w-6 sm:hidden"
