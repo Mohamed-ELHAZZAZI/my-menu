@@ -19,7 +19,7 @@ class MenusController extends Controller
             'phone' => $menu['info']['phone'],
             'type' => $menu['info']['type'],
             'template_id' => $menu['info']['template_id'],
-            'list' => $menu['list'],
+            'list' => $menu['lists'],
         ];
         $menu = Menu::create($data);
 

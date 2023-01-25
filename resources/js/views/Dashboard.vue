@@ -33,11 +33,6 @@ import store from "../store";
 const open = ref(false);
 
 const menus = computed(() => store.state.menus);
-
-const t = onMounted(() => {
-    store.dispatch("getMenus");
-    // .then((data) => (menus.value = data));
-});
 </script>
 
 <style scoped>

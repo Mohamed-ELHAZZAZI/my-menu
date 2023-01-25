@@ -17,7 +17,7 @@ const store = createStore({
                 template_id: null,
                 template_name: "",
             },
-            list: [],
+            lists: null,
         },
         menus: [],
         fakeMenu: {
@@ -91,27 +91,13 @@ const store = createStore({
                 return response;
             });
         },
-        createMenu({ commit, state }, list) {
-            const l = JSON.parse(JSON.stringify(list));
-
-            commit("setList", l);
+        createMenu({ commit, state }) {
             return axiosClient
                 .post("/menu/create", state.newMenu)
                 .then((response) => {
-                    commit("setToMenus", response);
+                    // commit("setToMenus", response);
                     return response;
                 });
-        },
-        getMenus({ state, commit }) {
-            if (state.menus) {
-                return axiosClient
-                    .post("/menu/get", state.newMenu)
-                    .then((response) => {
-                        commit("setToMenus", response, true);
-                        return response.data;
-                    });
-            }
-            return 1;
         },
     },
     mutations: {
@@ -121,26 +107,30 @@ const store = createStore({
             state.user.token = null;
             sessionStorage.removeItem("TOKEN");
         },
+        setError: (state, val) => {
+            state.error = val;
+        },
+
         setUser: (state, userData) => {
             state.error = "";
             state.user.token = userData.token;
             state.user.data = userData.user;
             sessionStorage.setItem("TOKEN", userData.token);
         },
+
+        //menu commits
         ChangeMenuInfo: (state, val) => {
             state.newMenu.info = val;
         },
-        setTemplate(state, val) {
+        setTemplate: (state, val) => {
             state.newMenu.info.template_id = val;
             const tmp = state.fakeMenu.images.find((flm) => flm.id === val);
             state.newMenu.info.template_name = tmp.name;
         },
-        setError: (state, val) => {
-            state.error = val;
+        setNewMenu: (state, menu) => {
+            state.newMenu.lists = menu;
         },
-        setList: (state, list) => {
-            state.newMenu.list = list;
-        },
+
         ClearMenuInfo: (state) => {
             state.newMenu = {
                 info: {
@@ -150,12 +140,10 @@ const store = createStore({
                     phone: "",
                     type: "",
                     template_id: null,
+                    template_name: null,
                 },
-                list: [],
+                lists: null,
             };
-        },
-        setToMenus: (state, menu) => {
-            state.menus = state.menus.concat(menu.data);
         },
     },
     modules: {},

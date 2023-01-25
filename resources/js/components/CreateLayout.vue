@@ -31,26 +31,19 @@
                         <DialogPanel
                             class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all my-8 w-full max-w-[95%] sm:max-w-[1000px]"
                         >
-                            <!-- code -->
-                            <!-- <NoticeBanner
-                                v-if="showBanner"
-                                @removeBanner="showBanner = false"
-                            /> -->
                             <CreateSteps :step="step" />
                             <Error :class="'mx-4 '" />
-                            <MenuTemplates ref="FirstStep" v-if="step === 1" />
-                            <templatesFill
-                                v-else-if="(step = 2)"
-                                :class="[' mx-6 my-3']"
+                            <InfoFirst v-if="step === 1" ref="FirstStep" />
+                            <MenuTemplates
+                                ref="SecoundStep"
+                                v-else-if="step === 2"
                             />
-
-                            <!-- <InfoFirst ref="FirstStep" v-if="step === 1" /> -->
-                            <!-- <ListThird
+                            <templatesFill
                                 ref="ThirdStep"
                                 v-else-if="step === 3"
+                                :class="[' mx-6 my-3']"
                                 @submitMenu="submitMenu"
-                            /> -->
-
+                            />
                             <LastStep
                                 v-else-if="step === 4"
                                 :MenuInfo="MenuInfo"
@@ -118,10 +111,7 @@ import {
 import { ExclamationTriangleIcon } from "@heroicons/vue/24/outline";
 import store from "../store";
 //to recover
-// import InfoFirst from "../components/create/InfoFirst.vue";
-// import ListThird from "../components/create/ListThird.vue";
-// import NoticeBanner from "../components/NoticeBanner.vue";
-// const showBanner = ref(true);
+import InfoFirst from "../components/create/InfoFirst.vue";
 
 //steps
 import CreateSteps from "../components/create/CreateSteps.vue";
@@ -157,11 +147,14 @@ function NextStep() {
     switch (step.value) {
         case 1:
             validated.value = FirstStep.value.submit();
+            break;
+        case 2:
+            validated.value = SecoundStep.value.submit();
             template_name.value = store.state.newMenu.info.template_name;
-
             break;
         case 3:
             ThirdStep.value.submit();
+            break;
     }
 
     if (validated.value) {
@@ -176,21 +169,20 @@ function PreviousStep() {
 }
 
 //step 3
-// function submitMenu(e) {
-//     store.commit("setError", "");
-//     MenuInfo.value = e;
-//     step.value += 1;
-// }
+function submitMenu(e) {
+    store.commit("setError", "");
+    MenuInfo.value = e;
+    step.value += 1;
+}
 
-// function FinishCreation() {
-//     emit("closeModel");
-//     setTimeout(() => {
-//         store.commit("ClearMenuInfo");
-//         step.value = 1;
-//     }, 500);
-// }
+function FinishCreation() {
+    emit("closeModel");
+    setTimeout(() => {
+        store.commit("ClearMenuInfo");
+        step.value = 1;
+    }, 500);
+}
 
-console.log(template_name.value);
 const templatesFill = defineAsyncComponent(() => {
     return import(`./create/templates/${template_name.value}.vue`);
 });
