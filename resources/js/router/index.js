@@ -9,9 +9,10 @@ import Contact from "../views/Contact.vue";
 //components
 import DefaultLayout from "../components/Layout/DefaultLayout.vue";
 import AuthLayout from "../components/Layout/AuthLayout.vue";
+import Menu from "../views/Menu.vue";
 const routes = [
     { path: "/:pathMatch(.*)*", redirect: "/404" },
-    { path: "/404", name: "PageNotFound", component: PageNotFound },
+    { path: "/404", name: "404", component: PageNotFound },
     {
         path: "/",
         redirect: "/dashboard",
@@ -39,6 +40,12 @@ const routes = [
                 component: Register,
             },
         ],
+    },
+    {
+        path: "/menu/:slug",
+        name: "Menu",
+        component: Menu,
+        props: true,
     },
 ];
 

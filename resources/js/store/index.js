@@ -99,6 +99,11 @@ const store = createStore({
                     return response;
                 });
         },
+        getMenu: (state, slug) => {
+            return axiosClient.get(`/menu/${slug}`).then((response) => {
+                return response;
+            });
+        },
     },
     mutations: {
         logout: (state) => {

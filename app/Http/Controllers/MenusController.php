@@ -28,10 +28,10 @@ class MenusController extends Controller
 
 
 
-    public function get()
+    public function get($id)
     {
-        $menus = Menu::where('user_id', 5)->get();
+        $menu = Menu::where('slug', $id)->first();
 
-        return response($menus);
+        return response($menu);
     }
 }

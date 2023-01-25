@@ -29,4 +29,4 @@ Route::post('/login', [UserController::class, 'login']);
 
 
 Route::post('/menu/create', [MenusController::class, 'create']);
-Route::post('/menu/get', [MenusController::class, 'get']);
+Route::get('/menu/{id}', [MenusController::class, 'get']);
