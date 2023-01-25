@@ -30,8 +30,8 @@
                     />
                     <hr class="h-[2px] bg-[#e89e30] my-3 w-full border-none" />
                     <div
-                        class="w-full flex justify-between"
-                        v-for="item in data.items"
+                        class="w-full flex justify-between relative"
+                        v-for="(item, index) in data.items"
                         :key="item.id"
                     >
                         <input
@@ -44,6 +44,49 @@
                             v-model="item.price"
                             class="bg-transparent border-none text-right w-1/5 text-white capitalize p-0 focus:border-none focus:ring-0"
                         />
+                        <div
+                            class="absolute -right-14 flex text-white justify-center items-center gap-2"
+                        >
+                            <button
+                                class="text-blue-600"
+                                @click="addItem(item, index, data)"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-5 h-5"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M12 4.5v15m7.5-7.5h-15"
+                                    />
+                                </svg>
+                            </button>
+
+                            <button
+                                class="text-red-600"
+                                @click="removeItem(item, data)"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="w-5 h-5"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M19.5 12h-15"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -194,6 +237,20 @@ const t = onMounted(() => {
         ],
     };
 });
+
+function addItem(item, index, data) {
+    const newItem = {
+        id: uuid.v4(),
+        name: "item",
+        price: "$1",
+    };
+
+    data.items.splice(index + 1, 0, newItem);
+}
+
+function removeItem(item, data) {
+    return (data.items = data.items.filter((q) => q !== item));
+}
 </script>
 
 <style></style>
